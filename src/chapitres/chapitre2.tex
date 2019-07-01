@@ -3,25 +3,178 @@
 \section{Sélection}
 
 \begin{frame}{Comment choisir ?}
+
+\begin{itemize}
+\item Analyse des cas d'utilisation.
+\item Définition de critères de choix.
+\item L'approche de sélection en entreprise.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Architecture}
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{8cm}|p{2.5cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Architecture} \\
+  	\hline
+  	Prédiction d'évènement entrant à l'aide de modèle d'apprentissage automatique & Lambda\\
+  	\hline
+  	Traitement des données en temps réel et par lots radicalement différents & Lambda \\
+  	\hline
+  	Traitement des données par lots complexe & Lambda \\
+  	\hline
+  	Très faible latence entre récupération et affichage des données & Kappa \\
+  	\hline
+  	Traitement des données par lots et en temps réel similaires & Kappa \\
+  	\hline
+  	Stockage permanent des données batch avant le traitement & Lambda/Kappa \\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de l'architecture}
+    \label{tab:critere-arch}
+\end{table}
+
 \end{frame}
 
 \begin{frame}{Message Broker}
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{8cm}|p{2.5cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Garantir la consommation d'un message par un seul consommateur & RabbitMQ\\
+  	\hline
+  	Nécessité d'ingérer rapidement une grande quantité de messages & Kafka\\
+  	\hline
+  	Ordre des messages primordial & Kafka\\
+  	\hline
+  	Nécessité de conserver les messages à plus au moins long terme & Kafka\\
+  	\hline
+  	Utilisation de protocoles spécifiques (MQTT, AMQP, ...) & RabbitMQ / ActiveMQ\\
+  	\hline
+  	Règles de routage des messages complexe & RabbitMQ / ActiveMQ\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix du logiciel d'agent de messages}
+    \label{tab:critere-message-broker}
+\end{table}
+
 \end{frame}
 
 \begin{frame}{Ingestion des données}
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{8cm}|p{2.5cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Manque de connaissances pour la réalisation de programmes personnalisés & ETL/ELT\\
+  	\hline
+  	Nécessité d'extraire de nombreuses sources de données & ETL/ELT\\
+  	\hline
+  	Peu de sources de données & Programme personnalisé\\
+  	\hline
+  	Nécessité d'avoir des performances élevées & Programme personnalisé\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix d'une solution complète ou d'un programme personnalisé pour l'ingestion des données.}
+    \label{tab:critere-etl-programme}
+\end{table}
+
 \end{frame}
 
-\begin{frame}{Traitement des données}
+\begin{frame}{Traitement des données : Batch}
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{8cm}|p{2.5cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Nécessité d'utiliser des librairies autres que l'apprentissage automatique & Spark\\
+  	\hline
+  	Nécessité d'avoir des performances accrues & Spark\\
+  	\hline
+  	Nécessité d'avoir une tolérance à la panne exemplaire & MapReduce\\
+  	\hline
+  	Les performances ne sont pas la priorité & MapReduce\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la solution de traitement par lots.}
+    \label{tab:critere-batch}
+\end{table}
+
+\end{frame}
+
+\begin{frame}{Traitement des données : Temps réel}
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{8cm}|p{2.5cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Source de données en micro batch & Spark Streaming\\
+  	\hline
+  	Source de données en streaming & Apache Storm\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la solution de traitement en temps réel.}
+    \label{tab:critere-real-time}
+\end{table}
+
 \end{frame}
 
 \begin{frame}{Stockage des données}
+
+
+
 \end{frame}
 
 \begin{frame}{Visualisation et analyse des données}
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{8cm}|p{2.5cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Monitoring & Grafana\\
+  	\hline
+  	Visualisation complexes & D3.js\\
+  	\hline
+  	Visualisation simples & Kibana/Solr\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la solution de visualisation et analyse des données.}
+    \label{tab:critere-viz}
+\end{table}
+
 \end{frame}
 
 \begin{frame}{Orchestration des données}
-\end{frame}
 
-\begin{frame}{Aller plus loin}
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{8cm}|p{2.5cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Nécessité d'effectuer une action spécifique en cas d'erreur & Apache Oozie\\
+  	\hline
+  	Nécessité de lancer une succession de tâche & Apache Oozie\\
+  	\hline
+  	Exécution de tâche simple & Cron\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la d'orchestration.}
+    \label{tab:critere-orchestration}
+\end{table}
+
 \end{frame}
